@@ -1,0 +1,1440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="CDA.xsl"?>
+
+<!--Scenario 3:  Medical to Dental Referral 
+Patient A is a 30-year-old male, recently graduated from college. He has mild hypertension, Type 1 Diabetes. 
+He noticed sharp, stabbing pain provoked by drinking cold beverages in the past week and lingering pain with biting in the last 2 days.
+He is able to eat regular food but only chews on the left side.  He takes 400 mg ibuprofen every 8 hours for pain. 
+Patient A has a dental visit with Dr. Drew Dentist of Good Oral Health clinic, who takes panographic images of the affected area,
+and performs a Pulp Viability Test on tooth #30.  Suspecting irreversible pulpitis, Dr. Drew Dentist refers Patient A to an
+Endodontist for assessment and therapy of tooth #30.
+
+-->
+<!--au
+    File:              Scenario3_DentalToDentalReferral_Sample_20200731.xml
+    Specification:     CDAR2_IG_DENTAL_R1_D1_2020SEP 
+    
+    Created:            Russ Ott            July 2020
+    Updated:            TBD
+    
+    
+    Revision History: 
+     none
+      
+    
+-->
+<!--
+    Disclaimer: 
+    This sample file is informative only.
+    This sample file contains representative data elements from the eICR IG. 
+    The file depicts a fictional character's health data. Any resemblance to a real person is coincidental.
+    To illustrate as many data elements as possible, the clinical scenario may not be entirely plausible. 
+    The data in this sample file is not intended to represent a real patients, people or clinical events. 
+       
+    Where guidance has been given to the conformance or cardinality of elements or
+    attributes and there is a discrepancy with the IG, the IG is always the normative
+    source of truth.
+    
+    Please note:  This sample is valid against the Schema and Schematron for ERRORS (not warnings). 
+    Logical schematron WARNINGS will generate from the sample file. 
+    It is logical to generate a samples file from a system with valid warnings.
+-->
+
+<!--
+        ********************************************************
+        CDA Header
+        ********************************************************
+    -->
+
+<ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:voc="urn:hl7-org:v3/voc" xmlns:sdtc="urn:hl7-org:sdtc">
+	<realmCode code="US"/>
+	<typeId extension="POCD_HD000040" root="2.16.840.1.113883.1.3"/>
+	<!-- US Realm Header template ID-->
+	<templateId root="2.16.840.1.113883.10.20.22.1.1" extension="2015-08-01"/>
+	<!-- C-CDA 2.1 Referral Note (V2) template ID-->
+	<templateId root="2.16.840.1.113883.10.20.22.1.14" extension="2015-08-01"/>
+	<!-- Dental Referral Note template ID-->
+	<templateId root="2.16.840.1.113883.10.20.40.1.1.1" extension="2020-08-01"/>
+	<!-- Globally unique identifier for the document  -->
+	<id root="45b48227-e792-4c98-a92d-b03ffac4d3ae"/>
+	<code code="57134-9" displayName="Dentistry Referral Note" codeSystem="2.16.840.1.113883.6.1"
+		codeSystemName="LOINC"/>
+	<!-- Title of this document -->
+	<title>Dentistry Referral Note</title>
+	<effectiveTime value="202003200900-0500"/>
+	<confidentialityCode code="N" displayName="normal" codeSystem="2.16.840.1.113883.5.25"
+		codeSystemName="Confidentiality"/>
+	<languageCode code="en-US"/>
+	<recordTarget typeCode="RCT">
+		<patientRole>
+			<!-- ID below is intended to represent an MRN from the referring organization -->
+			<id extension="5152020" root="1.2.3.4.5.6.7.8"/>
+			<addr use="HP">
+				<!-- HP is "primary home" from codeSystem 2.16.840.1.113883.5.1119 -->
+				<streetAddressLine>123 Test Dr</streetAddressLine>
+				<city>Denver</city>
+				<state>CO</state>
+				<postalCode>80204</postalCode>
+				<country>US</country>
+				<!-- US is "United States" from ISO 3166-1 Country Codes: 1.0.3166.1 -->
+			</addr>
+			<telecom value="tel:+1(123)456-7890" use="HP"/>
+			<!-- HP is "primary home" from HL7 AddressUse 2.16.840.1.113883.5.1119 -->
+			<telecom value="mailto:testA@email.com"/>
+			<patient>
+				<name use="L">
+					<given>Patient</given>
+					<family>A</family>
+				</name>
+				<administrativeGenderCode code="M" displayName="Male"
+					codeSystem="2.16.840.1.113883.5.1" codeSystemName="AdministrativeGender"/>
+				<!-- Date of birth need only be precise to the day -->
+				<birthTime value="19900101"/>
+				<maritalStatusCode code="S" displayName="Never Married"
+					codeSystem="2.16.840.1.113883.5.2" codeSystemName="MaritalStatusCode"/>
+				<religiousAffiliationCode code="1013"
+					displayName="Christian (non-Catholic, non-specific)"
+					codeSystem="2.16.840.1.113883.5.1076" codeSystemName="HL7 Religious Affiliation"/>
+				<!-- CDC Race and Ethnicity code set contains the five minimum race and ethnicity 
+					categories defined by OMB Standards -->
+				<raceCode code="2106-3" displayName="White" codeSystem="2.16.840.1.113883.6.238"
+					codeSystemName="Race &amp; Ethnicity - CDC"/>
+				<!-- The raceCode extension is only used if raceCode is valued -->
+				<ethnicGroupCode code="2186-5" displayName="Not Hispanic or Latino"
+					codeSystem="2.16.840.1.113883.6.238" codeSystemName="Race &amp; Ethnicity - CDC"/>
+				<languageCommunication>
+					<languageCode code="en"/>
+					<!-- "en" is ISO 639-1 alpha-2 code for "English" -->
+					<proficiencyLevelCode code="G" displayName="Good"
+						codeSystem="2.16.840.1.113883.5.61"
+						codeSystemName="LanguageAbilityProficiency"/>
+					<!-- Patient's preferred language -->
+					<preferenceInd value="true"/>
+				</languageCommunication>
+			</patient>
+		</patientRole>
+	</recordTarget>
+	<!-- The author represents the person who provides the content in the document -->
+	<author>
+		<time value="202003200900-0500"/>
+		<assignedAuthor>
+			<!-- The ID below represents an individual NPI -->
+			<id extension="1034567384" root="2.16.840.1.113883.4.6"/>
+			<code code="122300000X" displayName="Dental Providers; Dentist"
+				codeSystem="2.16.840.1.113883.6.101"
+				codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
+			<addr use="WP">
+				<streetAddressLine>54321 Main Street</streetAddressLine>
+				<city>Fairfax</city>
+				<state>VA</state>
+				<postalCode>22031</postalCode>
+				<country>US</country>
+			</addr>
+			<telecom use="WP" value="tel:+1(555)555-0002"/>
+			<assignedPerson>
+				<name>
+					<given>Drew</given>
+					<family>Dentist</family>
+					<suffix qualifier="AC">DMD</suffix>
+				</name>
+			</assignedPerson>
+		</assignedAuthor>
+	</author>
+	<!-- The custodian represents the organization charged with maintaining the original source document -->
+	<custodian>
+		<assignedCustodian>
+			<representedCustodianOrganization>
+				<!-- The ID below represents an NPI for an organization -->
+				<id extension="1316452726" root="2.16.840.1.113883.4.6"/>
+				<name>Good Oral Health Clinic</name>
+				<telecom use="WP" value="tel:+1(555)555-0002"/>
+				<addr use="WP">
+					<streetAddressLine>54321 Main Street</streetAddressLine>
+					<city>Fairfax</city>
+					<state>VA</state>
+					<postalCode>22031</postalCode>
+					<country>US</country>
+				</addr>
+			</representedCustodianOrganization>
+		</assignedCustodian>
+	</custodian>
+	<!-- The informationRecepient represents the entity/organization for which the document was generated -->
+	<informationRecipient>
+		<intendedRecipient>
+			<addr use="WP">
+				<streetAddressLine>98765 Main Street</streetAddressLine>
+				<city>Fairfax</city>
+				<state>VA</state>
+				<postalCode>22031</postalCode>
+				<country>US</country>
+			</addr>
+			<telecom use="WP" value="tel:+1(555)555-0003"/>
+			<informationRecipient>
+				<name>
+					<given>Edna</given>
+					<family>Endodontist</family>
+					<suffix qualifier="AC">DMD</suffix>
+				</name>
+			</informationRecipient>
+		</intendedRecipient>
+	</informationRecipient>
+	<!-- The legalAuthenticator represents the individual who is responsible for the document -->
+	<legalAuthenticator>
+		<time value="202003200900-0500"/>
+		<signatureCode code="S"/>
+		<assignedEntity>
+			<!-- The ID below represents an individual NPI -->
+			<id extension="1034567384" root="2.16.840.1.113883.4.6"/>
+			<code code="122300000X" displayName="Dental Providers; Dentist"
+				codeSystem="2.16.840.1.113883.6.101"
+				codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
+			<addr use="WP">
+				<streetAddressLine>54321 Main Street</streetAddressLine>
+				<city>Fairfax</city>
+				<state>VA</state>
+				<postalCode>22031</postalCode>
+				<country>US</country>
+			</addr>
+			<telecom use="WP" value="tel:+1(555)555-0002"/>
+			<assignedPerson>
+				<name>
+					<given>Drew</given>
+					<family>Dentist</family>
+					<suffix qualifier="AC">DMD</suffix>
+				</name>
+			</assignedPerson>
+		</assignedEntity>
+	</legalAuthenticator>
+	<participant typeCode="CALLBCK">
+		<!-- typeCode "CALLBCK" represents a call back contact -->
+		<associatedEntity classCode="ASSIGNED">
+			<!-- The ID below represents an individual NPI -->
+			<id extension="5555555555" root="2.16.840.1.113883.4.6"/>
+			<addr use="WP">
+				<streetAddressLine>54321 Main Street</streetAddressLine>
+				<city>Fairfax</city>
+				<state>VA</state>
+				<postalCode>22031</postalCode>
+				<country>US</country>
+			</addr>
+			<telecom value="tel:+1(555)555-0002" use="WP"/>
+			<associatedPerson>
+				<name>
+					<given>Drew</given>
+					<family>Dentist</family>
+					<suffix qualifier="AC">DMD</suffix>
+				</name>
+			</associatedPerson>
+		</associatedEntity>
+	</participant>
+	<componentOf>
+		<encompassingEncounter>
+			<id extension="01fa6e9e-c2ee-4203-9100-790b0c33cb1f" root="1.2.3.4.5.6.7"/>
+			<code code="D0140" displayName="limited oral evaluation - new or established patient"
+				codeSystem="2.16.840.1.113883.6.13" codeSystemName="CDT"/>
+			<effectiveTime value="202003200900-0500"/>
+		</encompassingEncounter>
+	</componentOf>
+	<!-- ******************************************************** CDA Body ******************************************************** -->
+	<component>
+		<structuredBody>
+			<!-- ************* Assessment Section *************** -->
+			<component>
+				<section>
+					<templateId root="2.16.840.1.113883.10.20.22.2.8"/>
+					<code codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" code="51848-0"
+						displayName="ASSESSMENTS"/>
+					<title>ASSESSMENTS</title>
+					<text>
+						<paragraph>#30 pulpal necrosis and perioapical pathosis with draining
+							fistula. Clinical impression is that possible vital pulp remnants
+							remain. #30 possible cracked DB cusp; rule out cracked tooth. Clinical
+							impression is that tooth is restorable. #29 D caries lesion </paragraph>
+						<paragraph>On exam of the right lower quadrant, tooth #30 was sensitive to percussion (lingering for 45 seconds) and to cold 
+							(sharp, stops when cold removed). No sensitivity to palpation, pain upon biting with relief upon opening. 
+							No evidence of new caries on distal; missing #28, replaced with endosteal (root form) implant with full crown tooth-colored restoration;
+							#32 impacted with possible full boney impaction. One cm swelling present on buccal free-gingiva around #29 and #30 with sinus tract present #30B. Periodontal pocket depth WNL.
+						</paragraph>
+					</text>
+				</section>
+			</component>
+			<!-- ************* Problem Section (entries required) V3 *************** -->
+			<component>
+				<section>
+					<!-- [C-CDA R2.1] Problem Section (entries required) -->
+					<templateId root="2.16.840.1.113883.10.20.22.2.5.1"/>
+					<templateId root="2.16.840.1.113883.10.20.22.2.5.1" extension="2015-08-01"/>
+					<code code="11450-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
+						displayName="PROBLEM LIST"/>
+					<title>PROBLEMS</title>
+					<text>
+						<list listType="ordered">
+							<item> Mild, Hypertension</item>
+							<item> Type 1 diabetes</item>
+						</list>
+					</text>
+					<entry typeCode="DRIV">
+						<act classCode="ACT" moodCode="EVN">
+							<!-- ** Problem Concern Act (V3) ** -->
+							<templateId root="2.16.840.1.113883.10.20.22.4.3"/>
+							<templateId root="2.16.840.1.113883.10.20.22.4.3" extension="2015-08-01"/>
+							<id root="3802a5ff-879e-4615-a7c0-86d8f8637cf7"/>
+							<code code="CONC" codeSystem="2.16.840.1.113883.5.6"
+								displayName="Concern"/>
+							<statusCode code="active"/>
+							<effectiveTime>
+								<low value="202003200900-0500"/>
+							</effectiveTime>
+							<author typeCode="AUT">
+								<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+								<time value="202003200900-0500"/>
+								<assignedAuthor>
+									<id extension="1034567384" root="2.16.840.1.113883.4.6"/>
+									<code code="122300000X" displayName="Dental Providers; Dentist"
+										codeSystem="2.16.840.1.113883.6.101"
+										codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
+								</assignedAuthor>
+							</author>
+							<entryRelationship typeCode="SUBJ">
+								<observation classCode="OBS" moodCode="EVN">
+									<!-- ** Problem Observation (V3) ** -->
+									<templateId root="2.16.840.1.113883.10.20.22.4.4"/>
+									<templateId root="2.16.840.1.113883.10.20.22.4.4"
+										extension="2015-08-01"/>
+									<id root="ab1791b0-5c71-11db-b0de-0500200c9a66"/>
+									<code code="75323-6" codeSystem="2.16.840.1.113883.6.1"
+										codeSystemName="LOINC" displayName="Condition"/>
+									<!-- The statusCode reflects the status of the observation itself -->
+									<statusCode code="completed"/>
+									<effectiveTime>
+										<low value="202003200900-0500"/>
+									</effectiveTime>
+									<value xsi:type="CD" code="38341003"
+										codeSystem="2.16.840.1.113883.6.96"
+										displayName="Hypertensive disorder (disorder)">
+										<translation code="175027D"
+											displayName="Hypertensive disorder (disorder)"
+											codeSystem="2.16.840.1.113883.3.3150"
+											codeSystemName="SNODENT"/>
+									</value>
+									<author typeCode="AUT">
+										<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+										<time value="202003200900-0500"/>
+										<assignedAuthor>
+											<id extension="1034567384" root="2.16.840.1.113883.4.6"/>
+											<code code="122300000X"
+												displayName="Dental Providers; Dentist"
+												codeSystem="2.16.840.1.113883.6.101"
+												codeSystemName="Healthcare Provider Taxonomy (HIPAA)"
+											/>
+										</assignedAuthor>
+									</author>
+								</observation>
+							</entryRelationship>
+						</act>
+					</entry>
+					<entry typeCode="DRIV">
+						<act classCode="ACT" moodCode="EVN">
+							<!-- ** Problem Concern Act (V3) ** -->
+							<templateId root="2.16.840.1.113883.10.20.22.4.3"/>
+							<templateId root="2.16.840.1.113883.10.20.22.4.3" extension="2015-08-01"/>
+							<id root="d78adb53-e4f3-40bf-a822-6ddd247146cf"/>
+							<code code="CONC" codeSystem="2.16.840.1.113883.5.6"
+								displayName="Concern"/>
+							<!-- The statusCode represents the need to continue tracking the problem -->
+							<!-- This is of ongoing concern to the provider -->
+							<statusCode code="active"/>
+							<effectiveTime>
+								<low value="202003200900-0500"/>
+							</effectiveTime>
+							<author typeCode="AUT">
+								<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+								<time value="202003200900-0500"/>
+								<assignedAuthor>
+									<id extension="1034567384" root="2.16.840.1.113883.4.6"/>
+									<code code="122300000X" displayName="Dental Providers; Dentist"
+										codeSystem="2.16.840.1.113883.6.101"
+										codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
+								</assignedAuthor>
+							</author>
+							<entryRelationship typeCode="SUBJ">
+								<observation classCode="OBS" moodCode="EVN">
+									<!-- ** Problem Observation (V3) ** -->
+									<templateId root="2.16.840.1.113883.10.20.22.4.4"/>
+									<templateId root="2.16.840.1.113883.10.20.22.4.4"
+										extension="2015-08-01"/>
+									<id root="ab1791b0-5c71-11db-b0de-0500200c9a66"/>
+									<code code="75323-6" codeSystem="2.16.840.1.113883.6.1"
+										codeSystemName="LOINC" displayName="Condition"/>
+									<!-- The statusCode reflects the status of the observation itself -->
+									<statusCode code="completed"/>
+									<effectiveTime>
+										<low value="202003200900-0500"/>
+									</effectiveTime>
+									<value xsi:type="CD" code="46635009"
+										codeSystem="2.16.840.1.113883.6.96"
+										displayName="Type 1 diabetes">
+										<translation code="175321D" displayName="Type 1 diabetes"
+											codeSystem="2.16.840.1.113883.3.3150"
+											codeSystemName="SNODENT"/>
+									</value>
+									<author typeCode="AUT">
+										<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+										<time value="202003200900-0500"/>
+										<assignedAuthor>
+											<id extension="1034567384" root="2.16.840.1.113883.4.6"/>
+											<code code="122300000X"
+												displayName="Dental Providers; Dentist"
+												codeSystem="2.16.840.1.113883.6.101"
+												codeSystemName="Healthcare Provider Taxonomy (HIPAA)"
+											/>
+										</assignedAuthor>
+									</author>
+								</observation>
+							</entryRelationship>
+						</act>
+					</entry>
+				</section>
+			</component>
+			<!-- ************* Dental Findings Section ************* -->
+			<component>
+				<!-- In this sample, the Referral is from a Primary Care Provider, and would not have dental-specific findings -->
+				<section nullFlavor="NI">
+					<templateId root="2.16.840.1.113883.10.20.40.1.2.1" extension="2020-08-01"/>
+					<code code="8704-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
+						displayName="Physical findings of the Mouth and Throat and Teeth"/>
+					<title>DENTAL FINDINGS</title>
+					<text>
+						<table border="1" width="100%">
+							<thead>
+								<tr>
+									<th>Finding Type</th>
+									<th>Finding</th>
+									<th>Value</th>
+									<th>Location</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Problem</td>
+									<td>Dental restoration present</td>
+									<td>N/A</td>
+									<td>Tooth #30; Structure of distal surface of tooth</td>
+								</tr>
+								<tr>
+									<td>Problem</td>
+									<td>Tooth tender to percussion</td>
+									<td>N/A</td>
+									<td>Tooth #30</td>
+								</tr>
+								<tr>
+									<td>Problem</td>
+									<td>Tooth sensitivity to cold</td>
+									<td>N/A</td>
+									<td>Tooth #30</td>
+								</tr>
+								<tr>
+									<td>Problem</td>
+									<td>Tooth sensitivity to pressure</td>
+									<td>N/A</td>
+									<td>Tooth #30</td>
+								</tr>
+								<tr>
+									<td>Problem</td>
+									<td>Dental crown present</td>
+									<td>N/A</td>
+									<td>Tooth #28</td>
+								</tr>
+								<tr>
+									<td>Problem</td>
+									<td>Endosseus Implant present</td>
+									<td>N/A</td>
+									<td>Tooth #28</td>
+								</tr>
+								<tr>
+									<td>Problem</td>
+									<td>Completely impacted tooth in bone</td>
+									<td>N/A</td>
+									<td>Tooth #32</td>
+								</tr>
+								<tr>
+									<td>Problem</td>
+									<td>Localized Swelling</td>
+									<td>N/A</td>
+									<td>Buccal gingiva</td>
+								</tr>
+								<tr>
+									<td>Result</td>
+									<td>Radiology Study Observation</td>
+									<td ID="Result_1">Radiographic results showed #32 full bony
+										impaction, #28 endosteal (root form) implant with full crown
+										restoration, and tooth #30 with small PA lesion mesial root.
+										Radiographic caries lesion #29 distal caries lesion (ADA
+										Caries Classification System moderate caries lesion). Other
+										WNL</td>
+									<td>Tooth #30</td>
+								</tr>
+							</tbody>
+						</table>
+					</text>
+					<entry>
+						<observation classCode="OBS" moodCode="EVN">
+							<!-- ** Problem Observation (V3) ** -->
+							<templateId root="2.16.840.1.113883.10.20.22.4.4"/>
+							<templateId root="2.16.840.1.113883.10.20.22.4.4" extension="2015-08-01"/>
+							<id root="0e215e3c-846b-4c11-9397-ae0f8a38b5a2"/>
+							<code code="75323-6" codeSystem="2.16.840.1.113883.6.1"
+								codeSystemName="LOINC" displayName="Condition"/>
+							<!-- The statusCode reflects the status of the observation itself -->
+							<statusCode code="completed"/>
+							<effectiveTime>
+								<low value="202003200900-0500"/>
+							</effectiveTime>
+							<value xsi:type="CD" code="109727004"
+								displayName="Dental restoration present"
+								codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+								<translation code="120871D" displayName="Dental restoration present"
+									codeSystem="2.16.840.1.113883.3.3150" codeSystemName="SNODENT"/>
+							</value>
+							<targetSiteCode code="28480000"
+								displayName="Permanent lower right first molar tooth"
+								codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+								<translation code="160770D"
+									displayName="Permanent lower right first molar tooth"
+									codeSystem="2.16.840.1.113883.3.3150" codeSystemName="SNODENT"/>
+							</targetSiteCode>
+							<targetSiteCode code="90933009"
+								displayName="Structure of distal surface of tooth"
+								codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+								<translation code="146014D"
+									displayName="Structure of distal surface of tooth"
+									codeSystem="2.16.840.1.113883.3.3150" codeSystemName="SNODENT"/>
+							</targetSiteCode>
+							<author typeCode="AUT">
+								<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+								<time value="202003200900-0500"/>
+								<assignedAuthor>
+									<id extension="1034567384" root="2.16.840.1.113883.4.6"/>
+									<code code="122300000X" displayName="Dental Providers; Dentist"
+										codeSystem="2.16.840.1.113883.6.101"
+										codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
+								</assignedAuthor>
+							</author>
+						</observation>
+					</entry>
+					<entry>
+						<observation classCode="OBS" moodCode="EVN">
+							<!-- ** Problem Observation (V3) ** -->
+							<templateId root="2.16.840.1.113883.10.20.22.4.4"/>
+							<templateId root="2.16.840.1.113883.10.20.22.4.4" extension="2015-08-01"/>
+							<id root="9b516772-c5e6-4468-9643-9c29974c6dcd"/>
+							<code code="75323-6" codeSystem="2.16.840.1.113883.6.1"
+								codeSystemName="LOINC" displayName="Condition"/>
+							<!-- The statusCode reflects the status of the observation itself -->
+							<statusCode code="completed"/>
+							<effectiveTime>
+								<low value="202003200900-0500"/>
+							</effectiveTime>
+							<value xsi:type="CD" code="109591005"
+								displayName="Tooth tender to percussion"
+								codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+								<translation code="128058D" displayName="Tooth tender to percussion"
+									codeSystem="2.16.840.1.113883.3.3150" codeSystemName="SNODENT"/>
+							</value>
+							<targetSiteCode code="28480000"
+								displayName="Permanent lower right first molar tooth"
+								codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+								<translation code="160770D"
+									displayName="Permanent lower right first molar tooth"
+									codeSystem="2.16.840.1.113883.3.3150" codeSystemName="SNODENT"/>
+							</targetSiteCode>
+							<author typeCode="AUT">
+								<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+								<time value="202003200900-0500"/>
+								<assignedAuthor>
+									<id extension="1034567384" root="2.16.840.1.113883.4.6"/>
+									<code code="122300000X" displayName="Dental Providers; Dentist"
+										codeSystem="2.16.840.1.113883.6.101"
+										codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
+								</assignedAuthor>
+							</author>
+						</observation>
+					</entry>
+					<entry>
+						<observation classCode="OBS" moodCode="EVN">
+							<!-- ** Problem Observation (V3) ** -->
+							<templateId root="2.16.840.1.113883.10.20.22.4.4"/>
+							<templateId root="2.16.840.1.113883.10.20.22.4.4" extension="2015-08-01"/>
+							<id root="9b516772-c5e6-4468-9643-9c29974c6dcd"/>
+							<code code="75323-6" codeSystem="2.16.840.1.113883.6.1"
+								codeSystemName="LOINC" displayName="Condition"/>
+							<!-- The statusCode reflects the status of the observation itself -->
+							<statusCode code="completed"/>
+							<effectiveTime>
+								<low value="202003200900-0500"/>
+							</effectiveTime>
+							<value xsi:type="CD" code="109594002"
+								displayName="Tooth sensitivity to cold"
+								codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+								<translation code="108969D" displayName="Tooth sensitivity to cold"
+									codeSystem="2.16.840.1.113883.3.3150" codeSystemName="SNODENT"/>
+							</value>
+							<targetSiteCode code="28480000"
+								displayName="Permanent lower right first molar tooth"
+								codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+								<translation code="160770D"
+									displayName="Permanent lower right first molar tooth"
+									codeSystem="2.16.840.1.113883.3.3150" codeSystemName="SNODENT"/>
+							</targetSiteCode>
+							<author typeCode="AUT">
+								<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+								<time value="202003200900-0500"/>
+								<assignedAuthor>
+									<id extension="1034567384" root="2.16.840.1.113883.4.6"/>
+									<code code="122300000X" displayName="Dental Providers; Dentist"
+										codeSystem="2.16.840.1.113883.6.101"
+										codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
+								</assignedAuthor>
+							</author>
+						</observation>
+					</entry>
+					<entry>
+						<observation classCode="OBS" moodCode="EVN">
+							<!-- ** Problem Observation (V3) ** -->
+							<templateId root="2.16.840.1.113883.10.20.22.4.4"/>
+							<templateId root="2.16.840.1.113883.10.20.22.4.4" extension="2015-08-01"/>
+							<id root="9b516772-c5e6-4468-9643-9c29974c6dcd"/>
+							<code code="75323-6" codeSystem="2.16.840.1.113883.6.1"
+								codeSystemName="LOINC" displayName="Condition"/>
+							<!-- The statusCode reflects the status of the observation itself -->
+							<statusCode code="completed"/>
+							<effectiveTime>
+								<low value="202003200900-0500"/>
+							</effectiveTime>
+							<value xsi:type="CD" code="109596000"
+								displayName="Tooth sensitivity to pressure"
+								codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+								<translation code="106172D"
+									displayName="Tooth sensitivity to pressure"
+									codeSystem="2.16.840.1.113883.3.3150" codeSystemName="SNODENT"/>
+							</value>
+							<targetSiteCode code="28480000"
+								displayName="Permanent lower right first molar tooth"
+								codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+								<translation code="160770D"
+									displayName="Permanent lower right first molar tooth"
+									codeSystem="2.16.840.1.113883.3.3150" codeSystemName="SNODENT"/>
+							</targetSiteCode>
+							<author typeCode="AUT">
+								<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+								<time value="202003200900-0500"/>
+								<assignedAuthor>
+									<id extension="1034567384" root="2.16.840.1.113883.4.6"/>
+									<code code="122300000X" displayName="Dental Providers; Dentist"
+										codeSystem="2.16.840.1.113883.6.101"
+										codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
+								</assignedAuthor>
+							</author>
+						</observation>
+					</entry>
+					<entry>
+						<observation classCode="OBS" moodCode="EVN">
+							<!-- ** Problem Observation (V3) ** -->
+							<templateId root="2.16.840.1.113883.10.20.22.4.4"/>
+							<templateId root="2.16.840.1.113883.10.20.22.4.4" extension="2015-08-01"/>
+							<id root="9b516772-c5e6-4468-9643-9c29974c6dcd"/>
+							<code code="75323-6" codeSystem="2.16.840.1.113883.6.1"
+								codeSystemName="LOINC" displayName="Condition"/>
+							<!-- The statusCode reflects the status of the observation itself -->
+							<statusCode code="completed"/>
+							<effectiveTime>
+								<low value="202003200900-0500"/>
+							</effectiveTime>
+							<value xsi:type="CD" code="278552004" displayName="Dental crown present"
+								codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+								<translation code="178492D" displayName="Dental crown present"
+									codeSystem="2.16.840.1.113883.3.3150" codeSystemName="SNODENT"/>
+							</value>
+							<targetSiteCode code="80140008"
+								displayName="Permanent lower right first premolar tooth"
+								codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+								<translation code="161496D"
+									displayName="Permanent lower right first premolar tooth"
+									codeSystem="2.16.840.1.113883.3.3150" codeSystemName="SNODENT"/>
+							</targetSiteCode>
+							<author typeCode="AUT">
+								<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+								<time value="202003200900-0500"/>
+								<assignedAuthor>
+									<id extension="1034567384" root="2.16.840.1.113883.4.6"/>
+									<code code="122300000X" displayName="Dental Providers; Dentist"
+										codeSystem="2.16.840.1.113883.6.101"
+										codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
+								</assignedAuthor>
+							</author>
+						</observation>
+					</entry>
+					<entry>
+						<observation classCode="OBS" moodCode="EVN">
+							<!-- ** Problem Observation (V3) ** -->
+							<templateId root="2.16.840.1.113883.10.20.22.4.4"/>
+							<templateId root="2.16.840.1.113883.10.20.22.4.4" extension="2015-08-01"/>
+							<id root="e2e07e09-4e58-486f-920d-8aa6de457995"/>
+							<code code="75323-6" codeSystem="2.16.840.1.113883.6.1"
+								codeSystemName="LOINC" displayName="Condition"/>
+							<!-- The statusCode reflects the status of the observation itself -->
+							<statusCode code="completed"/>
+							<effectiveTime>
+								<low value="202003200900-0500"/>
+							</effectiveTime>
+							<value xsi:type="CD" code="272307009" displayName="Endosseous oral implant (physical object)"
+								codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+								<translation code="212454D" displayName="Endosseous oral implant (physical object)"
+									codeSystem="2.16.840.1.113883.3.3150" codeSystemName="SNODENT"/>
+							</value>
+							<targetSiteCode code="80140008"
+								displayName="Permanent lower right first premolar tooth"
+								codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+								<translation code="161496D"
+									displayName="Permanent lower right first premolar tooth"
+									codeSystem="2.16.840.1.113883.3.3150" codeSystemName="SNODENT"/>
+							</targetSiteCode>
+							<author typeCode="AUT">
+								<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+								<time value="202003200900-0500"/>
+								<assignedAuthor>
+									<id extension="1034567384" root="2.16.840.1.113883.4.6"/>
+									<code code="122300000X" displayName="Dental Providers; Dentist"
+										codeSystem="2.16.840.1.113883.6.101"
+										codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
+								</assignedAuthor>
+							</author>
+							<!-- Only includes the UDI Organizer template in CCDA -->
+							<!-- Endosseous implant device example -->
+							<entryRelationship typeCode="COMP">
+								<!-- UDI Organizer -->
+								<organizer classCode="CLUSTER" moodCode="EVN">
+									<templateId root="2.16.840.1.113883.10.20.22.4.311" extension="2019-06-21"/>
+									<!-- UDI organizer/id matches the participantRole/id -->
+									<!-- The organizer splits the full HRF UDI value from GS1 into component observations -->
+									<id root="2.16.840.1.113883.3.3719" extension="(01)09504000059217(11)200101(21)EID123456789(10)ABC123" assigningAuthorityName="FDA"/>
+									<code code="74711-3" displayName="Unique Device Identifier" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+									<text/>
+									<statusCode code="completed"/>
+									<!-- Device Identifier -->
+									<component>
+										<observation classCode="OBS" moodCode="EVN">
+											<templateId root="2.16.840.1.113883.10.20.22.4.304" extension="2019-06-21"/>
+											<code code="C101722" displayName="Primary DI Number" codeSystem="2.16.840.1.113883.3.26.1.1" codeSystemName="NCI Thesaurus"/>
+											<value xsi:type="II" root="1.3.160" extension="09504000059217" assigningAuthorityName="GS1" displayable="true"/>
+										</observation>
+									</component>
+									<!-- Lot or Batch Number -->
+									<component>
+										<observation classCode="OBS" moodCode="EVN">
+											<templateId root="2.16.840.1.113883.10.20.22.4.315" extension="2019-06-21"/>
+											<code code="C101672" displayName="Lot or Batch Number" codeSystem="2.16.840.1.113883.3.26.1.1" codeSystemName="NCI Thesaurus"/>
+											<!-- Errata logged with Structured Documents to consider ED -->
+											<value xsi:type="ST">ABC123</value>
+										</observation>
+									</component>
+									<!-- Serial Number -->
+									<component>
+										<observation classCode="OBS" moodCode="EVN">
+											<templateId root="2.16.840.1.113883.10.20.22.4.319" extension="2019-06-21"/>
+											<code code="C101671" displayName="Serial Number" codeSystem="2.16.840.1.113883.3.26.1.1" codeSystemName="NCI Thesaurus"/> 
+											<value xsi:type="ED"> 
+												<reference value="EID123456789"/>
+											</value> 
+										</observation>
+									</component>
+									<!-- Manufacturing Date -->
+									<!-- If the value is parsed from UDI the format is YYMMDD and is transformed to YYYYMMDD. -->
+									<component>
+										<observation classCode="OBS" moodCode="EVN">
+											<templateId root="2.16.840.1.113883.10.20.22.4.316" extension="2019-06-21"/>
+											<code code="C101669" displayName="Manufacturing Date" codeSystem="2.16.840.1.113883.3.26.1.1" codeSystemName="NCI Thesaurus"/>
+											<value xsi:type="TS" value="20200101"/>
+										</observation>
+									</component>
+									<!-- Device Status Implanted -->
+									<component>
+										<observation classCode="OBS" moodCode="EVN">
+											<templateId root="2.16.840.1.113883.10.20.22.4.305" extension="2019-06-04"/>
+											<code code="C160939" codeSystem="2.16.840.1.113883.3.26.1.1"/>
+											<value xsi:type="CD" code="C45329" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="active" codeSystemName="NCI Thesaurus">
+												<reference value="implanted"/>
+											</value>
+										</observation>
+									</component>
+								</organizer>
+							</entryRelationship>
+						</observation>
+					</entry>
+					<entry>
+						<observation classCode="OBS" moodCode="EVN">
+							<!-- ** Problem Observation (V3) ** -->
+							<templateId root="2.16.840.1.113883.10.20.22.4.4"/>
+							<templateId root="2.16.840.1.113883.10.20.22.4.4" extension="2015-08-01"/>
+							<id root="9b516772-c5e6-4468-9643-9c29974c6dcd"/>
+							<code code="75323-6" codeSystem="2.16.840.1.113883.6.1"
+								codeSystemName="LOINC" displayName="Condition"/>
+							<!-- The statusCode reflects the status of the observation itself -->
+							<statusCode code="completed"/>
+							<effectiveTime>
+								<low value="202003200900-0500"/>
+							</effectiveTime>
+							<value xsi:type="CD" code="109511009"
+								displayName="Completely impacted tooth in bone"
+								codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+								<translation code="130542D"
+									displayName="Completely impacted tooth in bone"
+									codeSystem="2.16.840.1.113883.3.3150" codeSystemName="SNODENT"/>
+							</value>
+							<targetSiteCode code="38994002"
+								displayName="Permanent lower right third molar tooth"
+								codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+								<translation code="161121D"
+									displayName="Permanent lower right third molar tooth"
+									codeSystem="2.16.840.1.113883.3.3150" codeSystemName="SNODENT"/>
+							</targetSiteCode>
+							<author typeCode="AUT">
+								<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+								<time value="202003200900-0500"/>
+								<assignedAuthor>
+									<id extension="1034567384" root="2.16.840.1.113883.4.6"/>
+									<code code="122300000X" displayName="Dental Providers; Dentist"
+										codeSystem="2.16.840.1.113883.6.101"
+										codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
+								</assignedAuthor>
+							</author>
+						</observation>
+					</entry>
+					<entry>
+						<observation classCode="OBS" moodCode="EVN">
+							<!-- ** Problem Observation (V3) ** -->
+							<templateId root="2.16.840.1.113883.10.20.22.4.4"/>
+							<templateId root="2.16.840.1.113883.10.20.22.4.4" extension="2015-08-01"/>
+							<id root="82af65ae-ca8f-4932-8ba8-dcd9baa49a78"/>
+							<code code="75323-6" codeSystem="2.16.840.1.113883.6.1"
+								codeSystemName="LOINC" displayName="Condition"/>
+							<!-- The statusCode reflects the status of the observation itself -->
+							<statusCode code="completed"/>
+							<effectiveTime>
+								<low value="202003200900-0500"/>
+							</effectiveTime>
+							<value xsi:type="CD" code="722192005"
+								displayName="Localized swelling"
+								codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+								<translation code="212078D"
+									displayName="Localized swelling"
+									codeSystem="2.16.840.1.113883.3.3150" codeSystemName="SNODENT"/>
+							</value>
+							<targetSiteCode code="16811007"
+								displayName="Buccal mucosa"
+								codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+								<translation code="109364D"
+									displayName="Buccal mucosa"
+									codeSystem="2.16.840.1.113883.3.3150" codeSystemName="SNODENT"/>
+							</targetSiteCode>
+							<author typeCode="AUT">
+								<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+								<time value="202003200900-0500"/>
+								<assignedAuthor>
+									<id extension="1034567384" root="2.16.840.1.113883.4.6"/>
+									<code code="122300000X" displayName="Dental Providers; Dentist"
+										codeSystem="2.16.840.1.113883.6.101"
+										codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
+								</assignedAuthor>
+							</author>
+						</observation>
+					</entry>
+					<entry>
+						<!-- Result Organizer (V3) -->
+						<organizer classCode="CLUSTER" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.22.4.1"/>
+							<templateId root="2.16.840.1.113883.10.20.22.4.1" extension="2015-08-01"/>
+							<id root="b084aa57-1a15-4319-9716-7b6b5e7985f1"/>
+							<code code="D0220"
+								displayName="Intraoral - periapical first radiographic image"
+								codeSystemName="CDT2" codeSystem="2.16.840.1.113883.6.13"/>
+							<statusCode code="completed"/>
+							<effectiveTime>
+								<low value="202003200900-0500"/>
+								<high value="202003200900-0500"/>
+							</effectiveTime>
+							<component>
+								<!-- Result Observation (V3) -->
+								<observation classCode="OBS" moodCode="EVN">
+									<templateId root="2.16.840.1.113883.10.20.22.4.2"/>
+									<templateId root="2.16.840.1.113883.10.20.22.4.2"
+										extension="2015-08-01"/>
+									<id root="0e128ced-ef69-4e79-a3e0-82bd6cc015c2"/>
+									<code code="18782-3" displayName="Radiology Study Observation"
+										codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+									<statusCode code="completed"/>
+									<effectiveTime value="202003200900-0500"/>
+									<value xsi:type="ED">
+										<reference value="#Result_1"/>
+									</value>
+								</observation>
+							</component>
+						</organizer>
+					</entry>
+				</section>
+			</component>
+			<!-- ************* Allergies and Intolerances Section (entries required) (V3) *************** -->
+			<component>
+				<section>
+					<templateId root="2.16.840.1.113883.10.20.22.2.6.1" extension="2015-08-01"/>
+					<code code="48765-2" displayName="Allergies, adverse reactions, alerts"
+						codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+					<title>ALLERGIES</title>
+					<text>
+						<list>
+							<item> Penicillin G - 7980 </item>
+						</list>
+					</text>
+					<entry typeCode="DRIV">
+						<act classCode="ACT" moodCode="EVN">
+							<!-- ** Allergy Concern Act (V3) ** -->
+							<templateId root="2.16.840.1.113883.10.20.22.4.30"/>
+							<templateId root="2.16.840.1.113883.10.20.22.4.30"
+								extension="2015-08-01"/>
+							<id root="36e3e930-7b14-11db-9fe1-0500200c9a66"/>
+							<code code="CONC" codeSystem="2.16.840.1.113883.5.6"/>
+							<!-- The statusCode represents the need to continue tracking the allergy -->
+							<!-- This is of ongoing concern to the provider -->
+							<statusCode code="active"/>
+							<effectiveTime>
+								<low value="202003200900-0500"/>
+							</effectiveTime>
+							<author typeCode="AUT">
+								<!-- Same as Concern effectiveTime/low -->
+								<time value="202003200900-0500"/>
+								<assignedAuthor>
+									<id extension="1034567384" root="2.16.840.1.113883.4.6"/>
+									<code code="122300000X" displayName="Dental Providers; Dentist"
+										codeSystem="2.16.840.1.113883.6.101"
+										codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
+								</assignedAuthor>
+							</author>
+							<entryRelationship typeCode="SUBJ">
+								<observation classCode="OBS" moodCode="EVN">
+									<!-- ** Allergy - Intolerance Observation (V2) ** -->
+									<templateId root="2.16.840.1.113883.10.20.22.4.7"/>
+									<templateId root="2.16.840.1.113883.10.20.22.4.7"
+										extension="2014-06-09"/>
+									<id root="4adc1020-7b14-11db-9fe1-0500200c9a66"/>
+									<code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
+									<!-- Observation statusCode represents the status of the act of observing -->
+									<statusCode code="completed"/>
+									<effectiveTime>
+										<low value="202003200900-0500"/>
+									</effectiveTime>
+									<value xsi:type="CD" code="419199007"
+										displayName="Allergy to substance"
+										codeSystem="2.16.840.1.113883.6.96"
+										codeSystemName="SNOMED CT"/>
+									<author typeCode="AUT">
+										<time value="202003200900-0500"/>
+										<assignedAuthor>
+											<id extension="1034567384" root="2.16.840.1.113883.4.6"/>
+											<code code="122300000X"
+												displayName="Dental Providers; Dentist"
+												codeSystem="2.16.840.1.113883.6.101"
+												codeSystemName="Healthcare Provider Taxonomy (HIPAA)"
+											/>
+										</assignedAuthor>
+									</author>
+									<participant typeCode="CSM">
+										<participantRole classCode="MANU">
+											<playingEntity classCode="MMAT">
+												<code code="7980" displayName="Penicillin"
+												codeSystem="2.16.840.1.113883.6.88"
+												codeSystemName="RxNorm"/>
+											</playingEntity>
+										</participantRole>
+									</participant>
+								</observation>
+							</entryRelationship>
+						</act>
+					</entry>
+				</section>
+			</component>
+			<!-- ************* History of Present Illness Section *************** -->
+			<component>
+				<section>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.4"/>
+					<code codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" code="10164-2"
+						displayName="HISTORY OF PRESENT ILLNESS"/>
+					<title>HISTORY OF PRESENT ILLNESS</title>
+					<text>
+						<paragraph>One month ago, pt. reports he had a MOBD amalgam restoration
+							(D2161 #30 MOBD) placed in his right lower first molar (tooth #30) for a
+							fractured tooth - MB cusp lost due to undermining by caries lesion (ADA
+							Caries Classification System advanced caries lesion).</paragraph>
+						<paragraph>Patient A said the pain started 2 weeks ago and has progressively
+							worsened. He noticed sharp, stabbing pain provoked by drinking cold
+							beverages in the past week and lingering pain with biting in the last 2
+							days. He is able to eat regular food but only chews on the left side. He
+							takes 400 mg ibuprofen every 8 hours for pain. His last doses was 2
+							hours prior to this visit.</paragraph>
+					</text>
+				</section>
+			</component>
+			<!-- ************* Chief Complaint Section *************** -->
+			<component>
+				<section>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.1.13.2.1"/>
+					<code codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" code="10154-3"
+						displayName="Chief Complaint"/>
+					<title>CHIEF COMPLAINT</title>
+					<text>
+						<paragraph>Pain in lower right Quadrant</paragraph>
+					</text>
+				</section>
+			</component>
+			<!-- ************* Medications Section (entries required) (V2) *************** -->
+			<component>
+				<section>
+					<templateId root="2.16.840.1.113883.10.20.22.2.1.1" extension="2014-06-09"/>
+					<templateId root="2.16.840.1.113883.10.20.22.2.1.1"/>
+					<code code="10160-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
+						displayName="HISTORY OF MEDICATION USE"/>
+					<title>MEDICATIONS</title>
+					<text>
+						<table border="1" width="100%">
+							<thead>
+								<tr>
+									<th>Medication</th>
+									<th>Directions</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Lisinopril 10 mg tab</td>
+									<td>1 tab once a day</td>
+									<td>Active</td>
+								</tr>
+								<tr>
+									<td>Erythromycin 500 mg tab</td>
+									<td>1 tab every 6 hours for 10 days</td>
+									<td>Active</td>
+								</tr>
+								<tr>
+									<td>Ibuprofen 200mg tab</td>
+									<td>2 tablets every 8 hours as needed</td>
+									<td>Active</td>
+								</tr>
+								<tr>
+									<td>Acetaminophen 325mg tab</td>
+									<td>2 tablets every 4 hours as needed</td>
+									<td>Active</td>
+								</tr>
+							</tbody>
+						</table>
+					</text>
+					<entry typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<!-- ** Medication Activity (V2) ** -->
+							<templateId root="2.16.840.1.113883.10.20.22.4.16"
+								extension="2014-06-09"/>
+							<templateId root="2.16.840.1.113883.10.20.22.4.16"/>
+							<id root="f382f79b-f8d8-4a38-9daa-47f4bc9f0566"/>
+							<statusCode code="active"/>
+							<effectiveTime xsi:type="IVL_TS">
+								<low value="20200216"/>
+								<high nullFlavor="UNK"/>
+							</effectiveTime>
+							<effectiveTime xsi:type="PIVL_TS" institutionSpecified="true"
+								operator="A">
+								<period value="1" unit="d"/>
+							</effectiveTime>
+							<doseQuantity value="1"/>
+							<consumable>
+								<manufacturedProduct classCode="MANU">
+									<!-- ** Medication Information (V2) ** -->
+									<templateId root="2.16.840.1.113883.10.20.22.4.23"
+										extension="2014-06-09"/>
+									<templateId root="2.16.840.1.113883.10.20.22.4.23"/>
+									<id root="2e2a390c-ce26-49c5-9a4f-f9d69825da2f"/>
+									<manufacturedMaterial>
+										<code code="314076"
+											displayName="Lisinopril 10 mg Oral Tablet"
+											codeSystem="2.16.840.1.113883.6.88"
+											codeSystemName="RxNorm"/>
+									</manufacturedMaterial>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+					<entry typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<!-- ** Medication Activity (V2) ** -->
+							<templateId root="2.16.840.1.113883.10.20.22.4.16"
+								extension="2014-06-09"/>
+							<templateId root="2.16.840.1.113883.10.20.22.4.16"/>
+							<id root="00c5cb7d-fe61-43bf-bb77-7d3125487af4"/>
+							<statusCode code="active"/>
+							<effectiveTime xsi:type="IVL_TS">
+								<low value="20200216"/>
+								<high nullFlavor="UNK"/>
+							</effectiveTime>
+							<effectiveTime xsi:type="PIVL_TS" institutionSpecified="true"
+								operator="A">
+								<period value="6" unit="h"/>
+							</effectiveTime>
+							<doseQuantity value="1"/>
+							<consumable>
+								<manufacturedProduct classCode="MANU">
+									<!-- ** Medication Information (V2) ** -->
+									<templateId root="2.16.840.1.113883.10.20.22.4.23"
+										extension="2014-06-09"/>
+									<templateId root="2.16.840.1.113883.10.20.22.4.23"/>
+									<id root="733c17d4-f9c8-4b13-a8ef-26b88bc37eb8"/>
+									<manufacturedMaterial>
+										<code code="197650"
+											displayName="erythromycin 500 MG Oral Tablet"
+											codeSystem="2.16.840.1.113883.6.88"
+											codeSystemName="RxNorm"/>
+									</manufacturedMaterial>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+					<entry typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<!-- ** Medication Activity (V2) ** -->
+							<templateId root="2.16.840.1.113883.10.20.22.4.16"
+								extension="2014-06-09"/>
+							<templateId root="2.16.840.1.113883.10.20.22.4.16"/>
+							<id root="8b9056dd-73ff-4dd5-b280-e8edef7d7615"/>
+							<statusCode code="active"/>
+							<effectiveTime xsi:type="IVL_TS">
+								<low value="20200216"/>
+								<high nullFlavor="UNK"/>
+							</effectiveTime>
+							<effectiveTime xsi:type="PIVL_TS" institutionSpecified="true"
+								operator="A">
+								<period value="8" unit="h"/>
+							</effectiveTime>
+							<doseQuantity value="2"/>
+							<consumable>
+								<manufacturedProduct classCode="MANU">
+									<!-- ** Medication Information (V2) ** -->
+									<templateId root="2.16.840.1.113883.10.20.22.4.23"
+										extension="2014-06-09"/>
+									<templateId root="2.16.840.1.113883.10.20.22.4.23"/>
+									<id root="14bf506d-1a09-4797-9f8f-10c025c38ff9"/>
+									<manufacturedMaterial>
+										<code code="310965"
+											displayName="ibuprofen 200 MG Oral Tablet"
+											codeSystem="2.16.840.1.113883.6.88"
+											codeSystemName="RxNorm"/>
+									</manufacturedMaterial>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+					<entry typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<!-- ** Medication Activity (V2) ** -->
+							<templateId root="2.16.840.1.113883.10.20.22.4.16"
+								extension="2014-06-09"/>
+							<templateId root="2.16.840.1.113883.10.20.22.4.16"/>
+							<id root="9b336646-43e7-41b0-8ef8-7903a472591f"/>
+							<statusCode code="active"/>
+							<effectiveTime xsi:type="IVL_TS">
+								<low value="20200216"/>
+								<high nullFlavor="UNK"/>
+							</effectiveTime>
+							<effectiveTime xsi:type="PIVL_TS" institutionSpecified="true"
+								operator="A">
+								<period value="4" unit="h"/>
+							</effectiveTime>
+							<doseQuantity value="2"/>
+							<consumable>
+								<manufacturedProduct classCode="MANU">
+									<!-- ** Medication Information (V2) ** -->
+									<templateId root="2.16.840.1.113883.10.20.22.4.23"
+										extension="2014-06-09"/>
+									<templateId root="2.16.840.1.113883.10.20.22.4.23"/>
+									<id root="01859403-7052-4d84-b5bd-fd8f79ea1e5e"/>
+									<manufacturedMaterial>
+										<code code="313782"
+											displayName="acetaminophen 325 MG Oral Tablet"
+											codeSystem="2.16.840.1.113883.6.88"
+											codeSystemName="RxNorm"/>
+									</manufacturedMaterial>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+				</section>
+			</component>
+			<!-- ************* Payers Section (V3) *************** -->
+			<component>
+				<section>
+					<templateId root="2.16.840.1.113883.10.20.22.2.18"/>
+					<templateId root="2.16.840.1.113883.10.20.22.2.18" extension="2015-08-01"/>
+					<!-- ******** Payers section template ******** -->
+					<code code="48768-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
+						displayName="Payers"/>
+					<title>INSURANCE PROVIDERS</title>
+					<text> Aetna Comprehensive Medical /Dental Insurance </text>
+				</section>
+			</component>
+			<!-- ************* Reason for Referral Section (V3) *************** -->
+			<component>
+				<section>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.1"/>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.1" extension="2014-06-09"/>
+					<code code="42349-1" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
+						displayName="Reason for Referral "/>
+					<title>REASON FOR REFERRAL</title>
+					<text>
+						<paragraph>Referral to endodontist for evaluation of #30 and endodontic
+							therapy. (D3330)</paragraph>
+						<paragraph>Suspect irreversible pulpitis with necrotic pulp and periapical
+							pathosis. Tooth is restorable despite possible incomplete fracture DB
+							cusp #30.</paragraph>
+					</text>
+				</section>
+			</component>
+			<!-- ************* Plan of Treatment Section V2 *************** -->
+			<component>
+				<section>
+					<templateId root="2.16.840.1.113883.10.20.22.2.10"/>
+					<templateId root="2.16.840.1.113883.10.20.22.2.10" extension="2014-06-09"/>
+					<code code="18776-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
+						displayName="Treatment plan"/>
+					<title>TREATMENT PLAN</title>
+					<text>
+						<list listType="ordered">
+							<item>D3330 - endodontic therapy, molar tooth</item>
+						</list>
+					</text>
+					<entry>
+						<!-- Planned Encounter V2 template -->
+						<encounter moodCode="INT" classCode="ENC">
+							<templateId root="2.16.840.1.113883.10.20.22.4.40"/>
+							<templateId root="2.16.840.1.113883.10.20.22.4.40"
+								extension="2014-06-09"/>
+							<id root="9a6d1bac-17d3-4195-89a4-1121bc809b4d"/>
+							<code code="D3330" displayName="endodontic therapy, molar tooth"
+								codeSystemName="CDT2" codeSystem="2.16.840.1.113883.6.13"/>
+							<statusCode code="active"/>
+						</encounter>
+					</entry>
+				</section>
+			</component>
+			<!-- ************* Procedures Section (entries optional) (V2) ************* -->
+			<component>
+				<section>
+					<templateId root="2.16.840.1.113883.10.20.22.2.7"/>
+					<templateId root="2.16.840.1.113883.10.20.22.2.7" extension="2014-06-09"/>
+					<code code="47519-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
+						displayName="History of Procedures"/>
+					<title>PROCEDURES</title>
+					<text>
+						<table border="1" width="100%">
+							<thead>
+								<tr>
+									<th>Date</th>
+									<th>Code</th>
+									<th>Description</th>
+									<th>Location</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>March 20, 2020</td>
+									<td>D0220</td>
+									<td>Intraoral - periapical first radiographic image</td>
+									<td>Tooth #29</td>
+								</tr>
+								<tr>
+									<td>March 20, 2020</td>
+									<td>D0230</td>
+									<td>Intraoral - periapical each additional radiographic
+										image</td>
+									<td>Tooth #30</td>
+								</tr>
+								<tr>
+									<td>March 20, 2020</td>
+									<td>D0460</td>
+									<td>Pulp vitality test</td>
+									<td>N/A</td>
+								</tr>
+							</tbody>
+						</table>
+					</text>
+					<entry>
+						<observation classCode="OBS" moodCode="EVN">
+							<!-- Procedure Activity Observation V2-->
+							<templateId root="2.16.840.1.113883.10.20.22.4.13"/>
+							<templateId root="2.16.840.1.113883.10.20.22.4.13"
+								extension="2014-06-09"/>
+							<id root="24daaccb-ae21-474b-b542-73c9f145a134"/>
+							<code code="D0220" codeSystem="2.16.840.1.113883.6.13"
+								codeSystemName="CDT2"
+								displayName="Intraoral - periapical first radiographic image"/>
+							<statusCode code="completed"/>
+							<effectiveTime value="202003200900-0500"/>
+							<value xsi:type="ED" nullFlavor="NA"/>
+							<targetSiteCode code="8873007"
+								displayName="Permanent lower right second premolar tooth"
+								codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+								<translation code="161412D"
+									displayName="Permanent lower right second premolar tooth"
+									codeSystem="2.16.840.1.113883.3.3150" codeSystemName="SNODENT"/>
+							</targetSiteCode>
+						</observation>
+					</entry>
+					<entry>
+						<observation classCode="OBS" moodCode="EVN">
+							<!-- Procedure Activity Observation V2-->
+							<templateId root="2.16.840.1.113883.10.20.22.4.13"/>
+							<templateId root="2.16.840.1.113883.10.20.22.4.13"
+								extension="2014-06-09"/>
+							<id root="24daaccb-ae21-474b-b542-73c9f145a134"/>
+							<code code="D0230" codeSystem="2.16.840.1.113883.6.13"
+								codeSystemName="CDT2"
+								displayName="Intraoral - periapical each additional radiographic image"/>
+							<statusCode code="completed"/>
+							<effectiveTime value="202003200900-0500"/>
+							<value xsi:type="ED" nullFlavor="NA"/>
+							<targetSiteCode code="28480000"
+								displayName="Permanent lower right first molar tooth"
+								codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+								<translation code="160770D"
+									displayName="Permanent lower right first molar tooth"
+									codeSystem="2.16.840.1.113883.3.3150" codeSystemName="SNODENT"/>
+							</targetSiteCode>
+						</observation>
+					</entry>
+				</section>
+			</component>
+			<!-- ************* Vital Signs Section (entries required) (V3) *************** -->
+			<component>
+				<section>
+					<templateId root="2.16.840.1.113883.10.20.22.2.4.1" extension="2015-08-01"/>
+					<code code="8716-3" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
+						displayName="VITAL SIGNS"/>
+					<title>VITAL SIGNS</title>
+					<text>
+						<table border="1" width="100%">
+							<thead>
+								<tr>
+									<th>Observation Type</th>
+									<th>Value</th>
+									<th>Units</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Body Temperature</td>
+									<td>99</td>
+									<td>[degF]</td>
+								</tr>
+								<tr>
+									<td>Heart Rate</td>
+									<td>92</td>
+									<td>/min</td>
+								</tr>
+								<tr>
+									<td>Blood Pressure - Diastolic</td>
+									<td>86</td>
+									<td>mmHg</td>
+								</tr>
+								<tr>
+									<td>Blood Pressure - Systolic</td>
+									<td>136</td>
+									<td>mmHg</td>
+								</tr>
+							</tbody>
+						</table>
+					</text>
+					<entry typeCode="DRIV">
+						<!--- Vital Signs Organizer (V3) -->
+						<!-- When a set of vital signs are recorded together, include them in single clustered organizer-->
+						<organizer classCode="CLUSTER" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.22.4.26"/>
+							<templateId root="2.16.840.1.113883.10.20.22.4.26"
+								extension="2015-08-01"/>
+							<id root="773534d1-8cea-48e9-8877-2e01bf558e37"/>
+							<code code="46680005" displayName="Vital Signs"
+								codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+								<translation code="74728-7"
+									displayName="Vital signs, weight, height, head circumference, oximetry, BMI, and BSA panel "
+									codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+							</code>
+							<statusCode code="completed"/>
+							<effectiveTime value="202003200900-0500"/>
+							<component>
+								<!-- Vital Sign Observation (V2) -->
+								<observation classCode="OBS" moodCode="EVN">
+									<templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+									<templateId root="2.16.840.1.113883.10.20.22.4.27"
+										extension="2014-06-09"/>
+									<id root="0ffd18cc-70ec-4c5e-ab52-44c3c3a90916"/>
+									<code code="8310-5" codeSystem="2.16.840.1.113883.6.1"
+										codeSystemName="LOINC" displayName="BODY TEMPERATURE"/>
+									<statusCode code="completed"/>
+									<effectiveTime value="202003200900-0500"/>
+									<value xsi:type="PQ" value="99" unit="[degF]"/>
+								</observation>
+							</component>
+							<component>
+								<!-- Vital Sign Observation (V2) -->
+								<observation classCode="OBS" moodCode="EVN">
+									<templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+									<templateId root="2.16.840.1.113883.10.20.22.4.27"
+										extension="2014-06-09"/>
+									<id root="2fdc8846-c7fb-4b8a-bc65-1431bcfaabcf"/>
+									<code code="8867-4" codeSystem="2.16.840.1.113883.6.1"
+										codeSystemName="LOINC" displayName="HEART RATE"/>
+									<statusCode code="completed"/>
+									<effectiveTime value="202003200900-0500"/>
+									<value xsi:type="PQ" value="92" unit="/min"/>
+								</observation>
+							</component>
+							<component>
+								<!-- Vital Sign Observation (V2) -->
+								<observation classCode="OBS" moodCode="EVN">
+									<templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+									<templateId root="2.16.840.1.113883.10.20.22.4.27"
+										extension="2014-06-09"/>
+									<id root="9533a286-5a1a-49c4-86ea-02d1a534bb48"/>
+									<code code="8462-4" codeSystem="2.16.840.1.113883.6.1"
+										codeSystemName="LOINC"
+										displayName="Blood Pressure-Diastolic"/>
+									<statusCode code="completed"/>
+									<effectiveTime value="202003200900-0500"/>
+									<value xsi:type="PQ" value="86" unit="mm[Hg]"/>
+								</observation>
+							</component>
+							<component>
+								<!-- Vital Sign Observation (V2) -->
+								<observation classCode="OBS" moodCode="EVN">
+									<templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+									<templateId root="2.16.840.1.113883.10.20.22.4.27"
+										extension="2014-06-09"/>
+									<id root="5948121b-ee7f-4862-843c-1c9baeeb21f6"/>
+									<code code="8480-6" codeSystem="2.16.840.1.113883.6.1"
+										codeSystemName="LOINC" displayName="Blood Pressure-Systolic"/>
+									<statusCode code="completed"/>
+									<effectiveTime value="202003200900-0500"/>
+									<value xsi:type="PQ" value="130" unit="mm[Hg]"/>
+								</observation>
+							</component>
+						</organizer>
+					</entry>
+				</section>
+			</component>
+		</structuredBody>
+	</component>
+</ClinicalDocument>
