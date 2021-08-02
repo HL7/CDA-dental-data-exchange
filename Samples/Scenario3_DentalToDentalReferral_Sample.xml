@@ -720,7 +720,6 @@ Endodontist for assessment and therapy of tooth #30.
 									<!-- The organizer splits the full HRF UDI value from GS1 into component observations -->
 									<id root="2.16.840.1.113883.3.3719" extension="(01)09504000059217(11)200101(21)EID123456789(10)ABC123" assigningAuthorityName="FDA"/>
 									<code code="74711-3" displayName="Unique Device Identifier" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
-									<text/>
 									<statusCode code="completed"/>
 									<!-- Device Identifier -->
 									<component>
@@ -762,10 +761,8 @@ Endodontist for assessment and therapy of tooth #30.
 									<component>
 										<observation classCode="OBS" moodCode="EVN">
 											<templateId root="2.16.840.1.113883.10.20.22.4.305" extension="2019-06-04"/>
-											<code code="C160939" codeSystem="2.16.840.1.113883.3.26.1.1"/>
-											<value xsi:type="CD" code="C45329" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="active" codeSystemName="NCI Thesaurus">
-												<reference value="implanted"/>
-											</value>
+											<code code="C160939" displayName="Implantable Device Status" codeSystem="2.16.840.1.113883.3.26.1.1" codeSystemName="NCI Thesaurus"/>
+											<value xsi:type="CD" code="C45329" codeSystem="2.16.840.1.113883.3.26.1.1" displayName="active" codeSystemName="NCI Thesaurus"/>
 										</observation>
 									</component>
 								</organizer>
